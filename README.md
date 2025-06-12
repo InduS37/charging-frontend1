@@ -1,5 +1,62 @@
-# Vue 3 + Vite
+# ⚡ Charging Station Management System — Frontend
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This is the **frontend** of the Charging Station Management System built using **Vue 3**, **Vite**, and **Leaflet** for mapping.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+🔗 **Live Demo:** [charging-frontend10.onrender.com](https://charging-frontend10.onrender.com/)
+
+---
+
+## 🚀 Features
+
+- 🔐 **User Authentication** (Login)
+- 📄 **Add / Edit / Delete Charging Stations**
+- 🌍 **Map View** of all charging stations using Leaflet & OpenStreetMap
+- 📊 **All stations listed in a clean table**
+- 🔒 **Route protection & Logout**
+
+---
+
+## 🧱 Tech Stack
+
+- **Vue 3** + **Vite**
+- **Vue Router**
+- **Axios**
+- **Leaflet** (OpenStreetMap)
+- **Render** (for hosting)
+
+---
+
+## ⚙️ Setup Instructions
+
+### 📁 Clone the repo
+
+```bash
+git clone https://github.com/InduS37/charging-frontend1.git
+cd charging-frontend1
+npm install
+npm run dev
+
+🏗️ Build for production
+npm run build
+
+🔐 Environment Variables
+VITE_API_BASE_URL=https://charging-backend-6.onrender.com/api
+
+🧭 Project Structure
+
+├── public/
+├── src/
+│   ├── components/        # Vue components
+│   ├── router/            # Vue Router config
+│   ├── axios.js           # Axios setup with token handling
+│   └── main.js            # Entry file
+├── .env                   # API base URL
+├── index.html             # Root HTML
+└── vite.config.js         # Vite config
+
+📡 Backend Repository
+👉 https://github.com/InduS37/charging-backend.git
+
+🙋‍♀️ Author
+Name: Indhu
+Branch: B.Tech CSE
