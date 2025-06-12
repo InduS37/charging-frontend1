@@ -1,57 +1,38 @@
 <template>
-  <div class="map-container">
-    <LMap :zoom="6" :center="[defaultLat, defaultLng]" style="height: 500px; width: 100%;">
-      <LTileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <LMarker
-        v-for="station in stations"
-        :key="station._id"
-        :lat-lng="[station.location.lat, station.location.lng]"
-      >
-        <LPopup>
-          <strong>{{ station.name }}</strong><br />
-          Power: {{ station.powerOutput }} kW<br />
-          Connector: {{ station.connectorType }}<br />
-          Status: {{ station.status }}
-        </LPopup>
-      </LMarker>
-    </LMap>
-  </div>
+  <div id="map" style="height: 400px;"></div>
 </template>
 
 <script>
-import { LMap, LTileLayer, LMarker, LPopup } from '@vue-leaflet/vue-leaflet';
-import axios from '../../../frontend/src/axios';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 export default {
-  name: 'MapView',
-  components: {
-    LMap,
-    LTileLayer,
-    LMarker,
-    LPopup
+  props: ['stations'],
+  mounted() {
+    this.map = L.map('map').setView([20, 78], 4);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(this.map);
+
+    this.renderMarkers();
   },
-  data() {
-    return {
-      stations: [],
-      defaultLat: 20.5937, // Center of India
-      defaultLng: 78.9629
-    };
+  watch: {
+    stations: 'renderMarkers'
   },
-  async mounted() {
-  try {
-    const res = await axios.get('/stations');
-    this.stations = res.data;
-  } catch (err) {
-    console.error('Failed to load stations for map:', err);
+  methods: {
+    renderMarkers() {
+      if (!this.map) return;
+      this.stations.forEach(station => {
+        L.marker([station.location.lat, station.location.lng])
+          .addTo(this.map)
+          .bindPopup(`
+            <b>${station.name}</b><br>
+            ${station.status}<br>
+            ${station.powerOutput} kW<br>
+            ${station.connectorType}
+          `);
+      });
+    }
   }
-}
 };
 </script>
-
-<style scoped>
-.map-container {
-  margin-top: 20px;
-}
-</style>
