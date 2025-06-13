@@ -40,7 +40,7 @@ npm run dev
 npm run build
 
 🔐 Environment Variables
-VITE_API_BASE_URL=https://charging-backend-6.onrender.com/api
+VITE_API_BASE_URL=https://your-backend-url/api
 
 🧭 Project Structure
 
